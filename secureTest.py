@@ -1,3 +1,7 @@
+"""delatvan@gmail.com 
+    25.06.2017
+    """
+    
 import unittest
 import os
 import os.path
@@ -40,7 +44,7 @@ class TestStringMethods(unittest.TestCase):
 
     def test_EncriptionFiles(self):
     	password = "HolaAmigo123"
-    	fileName = "password"
+    	fileName = "passwordsExample"
     	key = hashingF(password)
     	encryptingFile(fileName,key)
     	decryptingFile(fileName+"Encrypted",key)
@@ -50,17 +54,18 @@ class TestStringMethods(unittest.TestCase):
     	fileReaderDeciphered.next()
     	passwordDeciphered = fileReaderDeciphered.next()
     	self.assertEqual(passwordOriginal,passwordDeciphered)
+        fileReaderOriginal.close()
+        fileReaderDeciphered.close()
 
-    # def test_OnAlreadyEncryptedFiles(self):
-    # 	password = "GoTHoCBBBM"
-    # 	fileName = "passwordDecrypted"
-    # 	key = hashingF(password)
-    # 	encryptingFile(fileName,key) #generates passwordEncrypted file
-    # 	decryptingFile("passwordEncrypted",key) #generates again passwordDecrypted
-    # 	self.assertTrue(os.path.isfile(fileName))
-    # 	self.assertTrue(os.path.isfile("passwordEncrypted"))
+    def test_OnAlreadyEncryptedFiles(self):
+    	password = "GoTHoCBBBM"
+    	fileName = "passwordsExampleDecrypted"
+    	key = hashingF(password)
+    	encryptingFile(fileName,key) #generates passwordsExampleEncrypted file
+    	decryptingFile("passwordsExampleEncrypted",key) #generates again passwordsExampleDecrypted
+    	self.assertTrue(os.path.isfile(fileName))
+    	self.assertTrue(os.path.isfile("passwordsExampleEncrypted"))
     	
-
 
 if __name__ == '__main__':
     unittest.main()
