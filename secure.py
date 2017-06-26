@@ -1,5 +1,5 @@
 """delatvan@gmail.com 
-	26.06.2017
+	27.06.2017
 	"""
 
 import sys
@@ -65,16 +65,29 @@ def encryptingFile(fileName, key):
 	Encrypts a whole file
 	"""
 	fileReader = open(fileName,"r")
+	tmpList = fileName.split(".")
+	fileName = tmpList[0]
+	try:
+		extension = "."+tmpList[1]
+	except Exception,e:
+		extension=""
+		pass
 	firstLine = fileReader.next().split("    ")
 	#Case were file hasn't ever been encrypted by this program
 	if firstLine[0]!= "decrypted file:":
-		fileWriter = open(fileName+"Encrypted","w")
-		fileWriter.write("encrypted file:    "+fileName+"    \n")
+		fileWriter = open(fileName+"Encrypted"+extension,"w")
+		fileWriter.write("encrypted file:    "+fileName+extension+"    \n")
 		fileReader.seek(0)
 	#Case were file was already encrypted by the program
 	else:
-		fileWriter = open(firstLine[1]+"Encrypted","w")
-		fileWriter.write("encrypted file:    "+firstLine[1]+"    \n")
+		tmpList = firstLine[1].split(".")
+		try:
+			extension = "."+tmpList[1]
+		except Exception,e:
+			extension=""
+			pass
+		fileWriter = open(tmpList[0]+"Encrypted"+extension,"w")
+		fileWriter.write("encrypted file:    "+tmpList[0]+extension+"    \n")
 	for line in fileReader:
 		iv = os.urandom(IV_SIZE)
 		cipherText = encryptingF(key,iv,paddingF(line,BLOCK_SIZE))
@@ -92,8 +105,14 @@ def decryptingFile(fileName, key):
 		raise ValueError("\nThis file hasn't been encrypted before\n")
 		fileReader.close()
 		sys.exit()
-	fileWriter = open(firstLine[1]+"Decrypted","w")
-	fileWriter.write("decrypted file:    "+firstLine[1]+"    \n")
+	tmpList = firstLine[1].split(".")
+	try:
+		extension = "."+tmpList[1]
+	except Exception,e:
+		extension=""
+		pass
+	fileWriter = open(tmpList[0]+"Decrypted"+extension,"w")
+	fileWriter.write("decrypted file:    "+tmpList[0]+extension+"    \n")
 	for line in fileReader:
 		lineList = line.split("    ")
 		cipherText = literal_eval(lineList[0])
