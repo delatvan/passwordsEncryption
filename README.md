@@ -23,3 +23,5 @@ The third one is secureScript.py:
 It is a user interface intended to be run in the terminal to help the user use the code of secure.py.
 The code takes as an argument the name of the file to be encrypted. For example:
 "python secureScript.py passwords"
+
+#TODO: add decrption to files with extensions
