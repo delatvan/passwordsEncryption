@@ -1,5 +1,5 @@
 """delatvan@gmail.com 
-	25.06.2017
+	26.06.2017
 	"""
 
 import sys
@@ -26,13 +26,16 @@ def hashingF(password):
 
 def paddingF(text,blockSize):
 	"""Padding function:
-	Adds bytes to get 128 block size
+	Adds bytes to get blocks of size 128
 	"""
 	padder = padding.PKCS7(blockSize).padder()
 	paddedData = padder.update(text)+padder.finalize()
 	return paddedData
 
 def unpaddingF(text, blockSize):
+	"""Unpadding function:
+	Inverse of paddingF. Takes away extra bytes
+	"""
 	unpadder = padding.PKCS7(blockSize).unpadder()
 	data = unpadder.update(text)+unpadder.finalize()
 	return data

@@ -1,11 +1,13 @@
 """delatvan@gmail.com 
-	25.06.2017
+	26.06.2017
 	"""
 import sys
 import os
+import getpass
 from secure import decryptingFile
 from secure import encryptingFile
 from secure import hashingF
+
 #Get File as argument from the command line
 argList = sys.argv
 try:
@@ -18,9 +20,10 @@ except Exception, e:
 #Open file in reading mode
 fileReader = open(fileName,"r")
 
-pswd = raw_input("Please enter your encryption or decryption password\n")
+print "Please enter your encryption or decryption password"
+pswd = getpass.getpass();
 key = hashingF(pswd)
-
+pswd = None;
 
 print "Would you like to decrypt or encrypt your file?"
 userInput = ""
@@ -36,7 +39,7 @@ elif userInput == "x":
 	fileReader.close()	
 	sys.exit()
 
-print "It is highly recommended to delete your input file\n"
+print "\nIt is highly recommended to delete your input file"
 userInput = raw_input("Would you like to remove your input file? Type in Y/N\n").lower()
 if userInput == "y":
 	os.remove(fileName)
