@@ -2,7 +2,7 @@
 # 26.06.2017
 # passwordsEncryption
 
-Small script in python to cipher and decipher a text file containing passwords.
+Script in python using the pyca/cryptography package and AES algorithm to cipher and decipher a text file containing passwords.
 
 I do not claim responsibility for the use of the code. This is intended just as a practice of the pyca/cryptography package available for python.
 
